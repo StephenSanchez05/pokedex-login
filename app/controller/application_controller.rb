@@ -25,9 +25,9 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-  get '/account' do
+  get '/collection' do
     @user = User.find(session[:user_id])
-    erb :account
+    erb :collection
   end
 
 
@@ -39,14 +39,14 @@ class ApplicationController < Sinatra::Base
 		user = User.find_by(:username => params[:username])
 		if user && user.authenticate(params[:password])
 			session[:user_id] = user.id
-			redirect "/account"
+			redirect "/collection"
 		else
 			redirect "failure"
 		end
   end
 
   get "/failure" do
-    erb :failure
+    erb :error
   end
 
   get "/logout" do
